@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            <h2>Let's Go Brew</h2>
+
+            <span>CAFÉ</span>
+
+        </div>
+
+
+        <nav>
+
+            <a href="{{ url_for('admin_dashboard') }}"
+               class="active">
+
+                🏠 Dashboard
+
+            </a>
+
+
+            <a href="{{ url_for('admin_menu') }}">
+
+                ☕ Menu
+
+            </a>
+
+
+            <a href="{{ url_for('admin_orders') }}">
+
+                🛒 Orders
+
+            </a>
+
+
+            <a href="{{ url_for('admin_messages') }}">
+
+                💬 Messages
+
+            </a>
+
+
+            <a href="{{ url_for('admin_history') }}">
+
+                📋 History
+
+            </a>
+
+        </nav>
+
+
+        <div class="sidebar-bottom">
+
+            <a href="{{ url_for('home') }}">
+
+                🌐 View Website
+
+            </a>
+
+
+            <a href="{{ url_for('logout') }}"
+               class="logout">
+
+                🚪 Logout
+
+            </a>
+
+        </div>
+
+    </aside>
+
+
+
+    <!-- =========================
+         MAIN CONTENT
+    ========================== -->
+
+    <main class="main-content">
+
+
+        <!-- =========================
+             TOP BAR
+        ========================== -->
+
+        <header class="topbar">
+
+            <div>
+
+                <h1>Dashboard</h1>
+
+                <p>
+
+                    Welcome back,
+                    {{ session.get('username', 'Admin') }}!
+
+                </p>
+
+            </div>
+
+
+            <div class="admin-profile">
+
+                <div class="profile-icon">
+
+                    A
+
+                </div>
+
+
+                <div>
+
+                    <strong>
+
+                        {{ session.get('username', 'Admin') }}
+
+                    </strong>
+
+                    <small>
+
+                        Administrator
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- =========================
+             DASHBOARD STATISTICS
+        ========================== -->
+
+        <section class="stats">
+
+
+            <!-- MENU ITEMS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    ☕
+
+                </div>
+
+
+                <div>
+
+                    <h3>Menu Items</h3>
+
+                    <p>
+
+                        {{ menu_count }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TODAY'S ORDERS -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    🛒
+
+                </div>
+
+
+                <div>
+
+                    <h3>Today's Orders</h3>
+
+                    <p>
+
+                        {{ today_orders }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MESSAGES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    💬
+
+                </div>
+
+
+                <div>
+
+                    <h3>Messages</h3>
+
+                    <p>
+
+                        {{ message_count }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- TODAY'S SALES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+
+                    💰
+
+                </div>
+
+
+                <div>
+
+                    <h3>Today's Sales</h3>
+
+                    <p>
+
+                        ₱{{ "%.2f"|format(today_sales) }}
+
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             DASHBOARD GRID
+        ========================== -->
+
+        <section class="dashboard-grid">
+
+
+
+            <!-- =========================
+                 RECENT ORDERS
+            ========================== -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <h2>
+
+                        Recent Orders
+
+                    </h2>
+
+
+                    <a href="{{ url_for('admin_orders') }}">
+
+                        View All
+
+                    </a>
+
+                </div>
+
+
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+
+                                Order
+
+                            </th>
+
+
+                            <th>
+
+                                Customer ID
+
+                            </th>
+
+
+                            <th>
+
+                                Date
+
+                            </th>
+
+
+                            <th>
+
+                                Total
+
+                            </th>
+
+
+                            <th>
+
+                                Status
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+
+                    <tbody>
+
+
+                        {% if recent_orders %}
+
+
+                            {% for order in recent_orders %}
+
+
+                            <tr>
+
+
+                                <!-- ORDER ID -->
+
+                                <td>
+
+                                    #{{ order.order_id }}
+
+                                </td>
+
+
+
+                                <!-- CUSTOMER ID -->
+
+                                <td>
+
+                                    {{ order.user_id }}
+
+                                </td>
+
+
+
+                                <!-- ORDER DATE -->
+
+                                <td>
+
+                                    {{ order.order_date }}
+
+                                </td>
+
+
+
+                                <!-- TOTAL -->
+
+                                <td>
+
+                                    ₱{{ "%.2f"|format(order.total_amount) }}
+
+                                </td>
+
+
+
+                                <!-- STATUS -->
+
+                                <td>
+
+                                    <span
+                                        class="status {{ order.status|lower }}">
+
+                                        {{ order.status }}
+
+                                    </span>
+
+                                </td>
+
+
+                            </tr>
+
+
+                            {% endfor %}
+
+
+                        {% else %}
+
+
+                            <tr>
+
+                                <td colspan="5"
+                                    style="text-align: center;">
+
+                                    No recent orders available.
+
+                                </td>
+
+                            </tr>
+
+
+                        {% endif %}
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+
+
+            <!-- =========================
+                 QUICK ACTIONS
+            ========================== -->
+
+            <div class="dashboard-card">
+
+
+                <div class="card-header">
+
+                    <h2>
+
+                        Quick Actions
+
+                    </h2>
+
+                </div>
+
+
+
+                <div class="quick-actions">
+
+
+                    <a href="{{ url_for('admin_menu') }}">
+
+                        <span>
+
+                            ☕
+
+                        </span>
+
+                        Manage Menu
+
+                    </a>
+
+
+
+                    <a href="{{ url_for('admin_orders') }}">
+
+                        <span>
+
+                            🛒
+
+                        </span>
+
+                        Manage Orders
+
+                    </a>
+
+
+
+                    <a href="{{ url_for('admin_messages') }}">
+
+                        <span>
+
+                            💬
+
+                        </span>
+
+                        View Messages
+
+                    </a>
+
+
+
+                    <a href="{{ url_for('admin_history') }}">
+
+                        <span>
+
+                            📋
+
+                        </span>
+
+                        View History
+
+                    </a>
+
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =========================
+             WELCOME SECTION
+        ========================== -->
+
+        <section class="welcome-card">
+
+
+            <div>
+
+
+                <span>
+
+                    LET'S GO BREW CAFÉ
+
+                </span>
+
+
+                <h2>
+
+                    Good coffee starts with
+                    good management.
+
+                </h2>
+
+
+                <p>
+
+                    Manage your café menu, orders,
+                    customer messages and daily
+                    activities from one place.
+
+                </p>
+
+
+            </div>
+
+
+
+            <div class="coffee-icon">
+
+                ☕
+
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+</body>
+
+</html>

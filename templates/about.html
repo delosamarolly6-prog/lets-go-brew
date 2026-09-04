@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/about.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <div class="logo">
+            <h2>Let's Go Brew</h2>
+            <span>CAFÉ</span>
+        </div>
+
+        <nav>
+            <a href="/">HOME</a>
+            <a href="/menu">MENU</a>
+            <a href="/about" class="active">ABOUT US</a>
+            <a href="/contact">CONTACT</a>
+        </nav>
+
+        <a href="/menu" class="order-btn">
+            ORDER NOW
+        </a>
+
+    </header>
+
+
+    <!-- ABOUT HERO -->
+    <section class="about-hero">
+
+        <div class="about-hero-content">
+
+            <p>OUR STORY</p>
+
+            <h1>
+                More Than Just<br>
+                A Cup of Coffee
+            </h1>
+
+            <span></span>
+
+        </div>
+
+    </section>
+
+
+    <!-- OUR STORY -->
+    <section class="story">
+
+        <div class="story-image">
+
+            <img
+                src="{{ url_for('static', filename='images/about-cafe.jpg') }}"
+                alt="Let's Go Brew Café">
+
+        </div>
+
+
+        <div class="story-content">
+
+            <p class="section-label">
+                ABOUT LET'S GO BREW
+            </p>
+
+            <h2>
+                A Place Where<br>
+                Coffee Brings People Together
+            </h2>
+
+            <p>
+                Let's Go Brew Café was created with a simple
+                mission — to bring people together over great
+                coffee, delicious food, and a welcoming atmosphere.
+            </p>
+
+            <p>
+                Whether you're starting your morning, meeting
+                friends, studying, or simply taking a break,
+                we're here to make every visit special.
+            </p>
+
+            <a href="/menu" class="about-btn">
+                EXPLORE OUR MENU
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- MISSION / VISION / VALUES -->
+    <section class="values">
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                ☕
+            </div>
+
+            <h3>OUR MISSION</h3>
+
+            <p>
+                To serve quality coffee and delicious food
+                while creating memorable experiences for
+                every customer.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                ◉
+            </div>
+
+            <h3>OUR VISION</h3>
+
+            <p>
+                To become a favorite community café known
+                for quality, comfort, and genuine service.
+            </p>
+
+        </div>
+
+
+        <div class="value-card">
+
+            <div class="value-icon">
+                ♥
+            </div>
+
+            <h3>OUR VALUES</h3>
+
+            <p>
+                Quality, passion, integrity, and customer
+                happiness guide everything we do.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- QUOTE -->
+    <section class="about-quote">
+
+        <h2>
+            "Coffee brings us together."
+        </h2>
+
+        <p>
+            Let's make every moment count.
+        </p>
+
+    </section>
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

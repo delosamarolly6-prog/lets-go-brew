@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Messages | Let's Go Brew</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+</head>
+
+<body>
+
+    <div class="admin-layout">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
+
+        <aside class="admin-sidebar">
+
+            <div class="admin-logo">
+                <div class="logo-icon">☕</div>
+
+                <div>
+                    <h2>Let's Go Brew</h2>
+                    <span>ADMIN PANEL</span>
+                </div>
+            </div>
+
+
+            <nav class="admin-nav">
+
+                <a href="{{ url_for('admin_dashboard') }}">
+                    <span>▦</span>
+                    Dashboard
+                </a>
+
+                <a href="{{ url_for('admin_history') }}">
+                    <span>◷</span>
+                    History
+                </a>
+
+                <a href="{{ url_for('admin_menu') }}">
+                    <span>☕</span>
+                    Menu
+                </a>
+
+                <a href="{{ url_for('admin_orders') }}">
+                    <span>▤</span>
+                    Orders
+                </a>
+
+                <a href="{{ url_for('admin_messages') }}"
+                   class="active">
+                    <span>✉</span>
+                    Messages
+                    <span class="nav-badge">2</span>
+                </a>
+
+            </nav>
+
+
+            <div class="sidebar-bottom">
+
+                <a href="{{ url_for('home') }}">
+                    <span>←</span>
+                    Back to Website
+                </a>
+
+                <a href="{{ url_for('login') }}">
+                    <span>⇥</span>
+                    Logout
+                </a>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =========================
+             MAIN CONTENT
+        ========================== -->
+
+        <main class="admin-main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="admin-topbar">
+
+                <div>
+                    <p class="page-label">ADMIN PANEL</p>
+                    <h1>Customer Messages</h1>
+                </div>
+
+
+                <div class="admin-profile">
+
+                    <div class="profile-icon">
+                        A
+                    </div>
+
+                    <div>
+                        <strong>Administrator</strong>
+                        <small>Admin</small>
+                    </div>
+
+                </div>
+
+            </header>
+
+
+            <!-- =========================
+                 MESSAGE CONTENT
+            ========================== -->
+
+            <section class="messages-page">
+
+
+                <!-- PAGE INTRO -->
+
+                <div class="messages-intro">
+
+                    <div>
+                        <h2>Inbox</h2>
+
+                        <p>
+                            View customer inquiries, feedback, and messages.
+                        </p>
+                    </div>
+
+
+                    <div class="message-summary">
+
+                        <div class="summary-number">
+                            2
+                        </div>
+
+                        <div>
+                            <strong>Messages</strong>
+                            <span>Customer inquiries</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- SEARCH + FILTER -->
+
+                <div class="message-tools">
+
+                    <div class="message-search">
+
+                        <span>⌕</span>
+
+                        <input
+                            type="text"
+                            id="messageSearch"
+                            placeholder="Search messages..."
+                        >
+
+                    </div>
+
+
+                    <select id="messageFilter">
+
+                        <option value="all">
+                            All Messages
+                        </option>
+
+                        <option value="unread">
+                            Unread
+                        </option>
+
+                        <option value="read">
+                            Read
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <!-- =========================
+                     MESSAGE LIST
+                ========================== -->
+
+                <div class="message-list">
+
+
+                    <!-- MESSAGE 1 -->
+
+                    <div class="message-card unread-card"
+                         data-status="unread">
+
+                        <div class="message-avatar">
+                            R
+                        </div>
+
+
+                        <div class="message-content">
+
+                            <div class="message-header">
+
+                                <div>
+                                    <h3>Rolly</h3>
+
+                                    <span class="message-email">
+                                        rollydelosama@gmail.com
+                                    </span>
+                                </div>
+
+                                <span class="message-status unread">
+                                    Unread
+                                </span>
+
+                            </div>
+
+
+                            <p class="message-preview">
+                                Perfect ambiance, good for meeting
+                                and nice staff.
+                            </p>
+
+
+                            <div class="message-footer">
+
+                                <span>
+                                    August 29, 2026 · 6:30 PM
+                                </span>
+
+                                <button class="view-message">
+                                    View Message
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MESSAGE 2 -->
+
+                    <div class="message-card unread-card"
+                         data-status="unread">
+
+                        <div class="message-avatar">
+                            S
+                        </div>
+
+
+                        <div class="message-content">
+
+                            <div class="message-header">
+
+                                <div>
+                                    <h3>Shane</h3>
+
+                                    <span class="message-email">
+                                        Shanetones@gmail.com
+                                    </span>
+                                </div>
+
+                                <span class="message-status unread">
+                                    Unread
+                                </span>
+
+                            </div>
+
+
+                            <p class="message-preview">
+                                Awesome cafe interior, I love the
+                                coffee and I want to...
+                            </p>
+
+
+                            <div class="message-footer">
+
+                                <span>
+                                    August 29, 2026 · 6:53 PM
+                                </span>
+
+                                <button class="view-message">
+                                    View Message
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- EMPTY MESSAGE -->
+
+                <div class="no-results" id="noResults">
+
+                    <div class="no-results-icon">
+                        ✉
+                    </div>
+
+                    <h3>No messages found</h3>
+
+                    <p>
+                        Try changing your search or filter.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+        </main>
+
+    </div>
+
+
+    <!-- =========================
+         SEARCH / FILTER SCRIPT
+    ========================== -->
+
+    <script>
+
+        const searchInput =
+            document.getElementById("messageSearch");
+
+        const filter =
+            document.getElementById("messageFilter");
+
+        const cards =
+            document.querySelectorAll(".message-card");
+
+        const noResults =
+            document.getElementById("noResults");
+
+
+        function filterMessages() {
+
+            const search =
+                searchInput.value.toLowerCase();
+
+            const selected =
+                filter.value;
+
+            let visible = 0;
+
+
+            cards.forEach(card => {
+
+                const text =
+                    card.innerText.toLowerCase();
+
+                const status =
+                    card.dataset.status;
+
+
+                const matchesSearch =
+                    text.includes(search);
+
+                const matchesFilter =
+                    selected === "all" ||
+                    status === selected;
+
+
+                if (matchesSearch && matchesFilter) {
+
+                    card.style.display = "flex";
+
+                    visible++;
+
+                } else {
+
+                    card.style.display = "none";
+
+                }
+
+            });
+
+
+            if (visible === 0) {
+
+                noResults.style.display = "block";
+
+            } else {
+
+                noResults.style.display = "none";
+
+            }
+
+        }
+
+
+        searchInput.addEventListener(
+            "input",
+            filterMessages
+        );
+
+
+        filter.addEventListener(
+            "change",
+            filterMessages
+        );
+
+    </script>
+
+</body>
+</html>

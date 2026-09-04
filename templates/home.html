@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <div class="logo">
+            <h2>Let's Go Brew</h2>
+            <span>CAFÉ</span>
+        </div>
+
+       <nav>
+    <a href="/">HOME</a>
+    <a href="/menu">MENU</a>
+    <a href="/about">ABOUT US</a>
+    <a href="/contact">CONTACT</a>
+</nav>
+
+<a href="/menu" class="order-btn">
+    ORDER NOW
+</a>
+
+<a href="{{ url_for('logout') }}" class="logout-btn">
+    LOG OUT
+</a>
+
+    </header>
+
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <p class="small-title">
+                WELCOME TO
+            </p>
+
+            <h1>
+                Let's Go<br>
+                Brew Café
+            </h1>
+
+            <p class="description">
+                Good coffee, good food, and good vibes.
+                Your perfect place to relax and enjoy
+                freshly brewed coffee.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/menu" class="primary-btn">
+                    EXPLORE MENU
+                </a>
+
+                <a href="/about" class="secondary-btn">
+                    LEARN MORE
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FEATURES -->
+    <section class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ☕
+            </div>
+
+            <h3>
+                QUALITY COFFEE
+            </h3>
+
+            <p>
+                Carefully brewed coffee using
+                quality ingredients.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ♥
+            </div>
+
+            <h3>
+                MADE WITH LOVE
+            </h3>
+
+            <p>
+                Every cup and meal is prepared
+                with passion.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ★
+            </div>
+
+            <h3>
+                COZY PLACE
+            </h3>
+
+            <p>
+                A comfortable place to relax,
+                study, or meet friends.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>

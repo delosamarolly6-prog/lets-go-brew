@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/auth.css') }}">
+
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <div class="logo">
+            Let's Go Brew
+        </div>
+
+        <div class="logo-subtitle">
+            CAFÉ
+        </div>
+
+
+        <h1>Create Account</h1>
+
+        <p class="auth-description">
+            Join Let's Go Brew Café
+        </p>
+
+
+        {% if error %}
+
+        <div class="error-message">
+            {{ error }}
+        </div>
+
+        {% endif %}
+
+
+        <form method="POST"
+              action="{{ url_for('signup') }}">
+
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Choose a username"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label for="confirm_password">
+                    Confirm Password
+                </label>
+
+                <input
+                    type="password"
+                    id="confirm_password"
+                    name="confirm_password"
+                    placeholder="Confirm your password"
+                    required>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="auth-button">
+
+                CREATE ACCOUNT
+
+            </button>
+
+        </form>
+
+
+        <div class="auth-footer">
+
+            Already have an account?
+
+            <a href="{{ url_for('login') }}">
+                Login
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

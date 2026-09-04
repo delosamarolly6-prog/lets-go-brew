@@ -1,0 +1,361 @@
+/* =========================
+   LOGIN PAGE
+========================= */
+
+.login-page {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+
+    font-family: Arial, sans-serif;
+
+    background: #f5eee6;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.login-container {
+
+    display: flex;
+
+    width: 100%;
+    min-height: 100vh;
+
+}
+
+
+/* =========================
+   LEFT IMAGE
+========================= */
+
+.login-image {
+
+    width: 50%;
+
+    background-image:
+        linear-gradient(
+            rgba(35, 20, 13, 0.55),
+            rgba(35, 20, 13, 0.55)
+        ),
+        url("/static/images/background.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+}
+
+
+.overlay {
+
+    color: white;
+
+    text-align: center;
+
+}
+
+
+.overlay h1 {
+
+    font-family: Georgia, serif;
+
+    font-size: 60px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.overlay p {
+
+    font-size: 20px;
+
+    line-height: 1.6;
+
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.login-form-container {
+
+    width: 50%;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    background: #fffaf4;
+
+}
+
+
+.login-form {
+
+    width: 420px;
+
+    padding: 40px;
+
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.logo {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+
+}
+
+
+.logo h2 {
+
+    margin: 0;
+
+    font-family: Georgia, serif;
+
+    font-size: 34px;
+
+    color: #3b2115;
+
+}
+
+
+.logo span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    letter-spacing: 7px;
+
+    font-size: 12px;
+
+    color: #a66a2c;
+
+}
+
+
+/* =========================
+   TITLE
+========================= */
+
+.login-form h1 {
+
+    text-align: center;
+
+    font-family: Georgia, serif;
+
+    color: #3b2115;
+
+    font-size: 36px;
+
+    margin-bottom: 8px;
+
+}
+
+
+.subtitle {
+
+    text-align: center;
+
+    color: #777;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =========================
+   ERROR
+========================= */
+
+.error-message {
+
+    background: #f8d7da;
+
+    color: #842029;
+
+    border: 1px solid #f1aeb5;
+
+    padding: 12px;
+
+    border-radius: 6px;
+
+    margin-bottom: 20px;
+
+    text-align: center;
+
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.form-group {
+
+    margin-bottom: 20px;
+
+}
+
+
+.form-group label {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    font-weight: bold;
+
+    color: #3b2115;
+
+}
+
+
+.form-group input {
+
+    width: 100%;
+
+    box-sizing: border-box;
+
+    padding: 14px 15px;
+
+    border: 1px solid #d4c4b5;
+
+    border-radius: 6px;
+
+    background: white;
+
+    font-size: 15px;
+
+    outline: none;
+
+}
+
+
+.form-group input:focus {
+
+    border-color: #a66a2c;
+
+}
+
+
+/* =========================
+   LOGIN BUTTON
+========================= */
+
+.login-button {
+
+    width: 100%;
+
+    padding: 15px;
+
+    border: none;
+
+    border-radius: 30px;
+
+    background: #3b2115;
+
+    color: white;
+
+    font-size: 16px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.login-button:hover {
+
+    background: #a66a2c;
+
+}
+
+
+/* =========================
+   SIGNUP
+========================= */
+
+.signup-link {
+
+    text-align: center;
+
+    margin-top: 25px;
+
+}
+
+
+.signup-link p {
+
+    color: #777;
+
+}
+
+
+.signup-link a {
+
+    color: #a66a2c;
+
+    font-weight: bold;
+
+    text-decoration: none;
+
+}
+
+
+.signup-link a:hover {
+
+    text-decoration: underline;
+
+}
+
+
+/* =========================
+   BACK HOME
+========================= */
+
+.back-home {
+
+    text-align: center;
+
+    margin-top: 20px;
+
+}
+
+
+.back-home a {
+
+    color: #3b2115;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+}
+
+
+.back-home a:hover {
+
+    color: #a66a2c;
+
+}

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Dashboard | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <style>
+
+        body {
+            margin: 0;
+            background: #f8f3ed;
+            font-family: Arial, sans-serif;
+        }
+
+        .staff-header {
+            background: #4b2e1f;
+            color: white;
+            padding: 20px 40px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .staff-header h2 {
+            margin: 0;
+        }
+
+        .logout-btn {
+            color: white;
+            text-decoration: none;
+            padding: 10px 18px;
+            border: 1px solid white;
+            border-radius: 6px;
+        }
+
+        .dashboard-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            margin-bottom: 5px;
+        }
+
+        .dashboard-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+        }
+
+        .dashboard-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .dashboard-card h2 {
+            margin-top: 0;
+        }
+
+        .dashboard-card p {
+            color: #666;
+        }
+
+        .dashboard-btn {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 12px 20px;
+            background: #6f4e37;
+            color: white;
+            text-decoration: none;
+            border-radius: 7px;
+        }
+
+        .dashboard-btn:hover {
+            opacity: 0.9;
+        }
+
+        @media (max-width: 700px) {
+
+            .dashboard-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .staff-header {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- STAFF HEADER -->
+
+    <header class="staff-header">
+
+        <h2>
+            Let's Go Brew Café
+        </h2>
+
+        <a href="/logout" class="logout-btn">
+            LOGOUT
+        </a>
+
+    </header>
+
+
+    <!-- DASHBOARD -->
+
+    <main class="dashboard-container">
+
+        <div class="welcome">
+
+            <h1>
+                Staff Dashboard
+            </h1>
+
+            <p>
+                Welcome, Staff! Manage and process customer orders.
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-cards">
+
+            <!-- ORDERS -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    🛒 Customer Orders
+                </h2>
+
+                <p>
+                    View incoming customer orders and update
+                    their order status.
+                </p>
+
+                <a href="/staff/orders"
+                   class="dashboard-btn">
+
+                    VIEW ORDERS
+
+                </a>
+
+            </div>
+
+
+            <!-- ORDER PROCESSING -->
+
+            <div class="dashboard-card">
+
+                <h2>
+                    📋 Order Processing
+                </h2>
+
+                <p>
+                    Process orders from Pending to Preparing,
+                    Ready, and Completed.
+                </p>
+
+                <a href="/staff/orders"
+                   class="dashboard-btn">
+
+                    PROCESS ORDERS
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+</body>
+
+</html>

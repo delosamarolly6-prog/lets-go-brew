@@ -1,0 +1,251 @@
+
+
+        body {
+            background: #f8f3ed;
+        }
+
+        .orders-container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 40px auto;
+        }
+
+        .orders-title {
+            margin-bottom: 30px;
+        }
+
+        .orders-title h1 {
+            margin-bottom: 5px;
+        }
+
+        .order-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-header h2 {
+            margin: 0;
+        }
+
+        .order-info {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .order-info div {
+            background: #f7f7f7;
+            padding: 12px;
+            border-radius: 8px;
+        }
+
+        .order-info strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .status-section {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .status-section label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .status-select {
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 15px;
+            min-width: 180px;
+        }
+
+        .update-btn {
+            margin-left: 10px;
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            background: #6f4e37;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .update-btn:hover {
+            opacity: 0.9;
+        }
+
+        .order-items {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        .order-items th,
+        .order-items td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+
+        .order-items th {
+            background: #f5f5f5;
+        }
+
+        .order-total {
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+            margin-top: 15px;
+        }
+
+        .no-orders {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            border-radius: 12px;
+        }
+
+        @media (max-width: 768px) {
+
+            .order-info {
+                grid-template-columns: 1fr;
+            }
+
+            .order-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .update-btn {
+                margin-left: 0;
+                margin-top: 10px;
+            }
+
+        }
+
+        /* =========================
+   STATUS BADGES
+========================= */
+
+.status-badge {
+    display: inline-block;
+    padding: 7px 14px;
+    border-radius: 20px;
+    font-weight: bold;
+    margin-left: 8px;
+    font-size: 14px;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-preparing {
+    background: #cfe2ff;
+    color: #084298;
+}
+
+.status-ready {
+    background: #d1e7dd;
+    color: #0f5132;
+}
+
+.status-completed {
+    background: #198754;
+    color: white;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #842029;
+}
+
+
+/* =========================
+   DELETE BUTTON
+========================= */
+
+.delete-btn {
+    margin-left: 10px;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    background: #b02a37;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* =========================
+   ORDER ACTIONS
+========================= */
+
+.status-section {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.status-section label {
+    width: 100%;
+}
+
+.status-section .update-btn,
+.status-section .delete-btn {
+    margin-left: 0;
+}
+
+
+/* =========================
+   ORDER SEARCH
+========================= */
+
+.order-tools {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+}
+
+.order-search {
+    flex: 1;
+    min-width: 250px;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+
+.status-filter {
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 15px;
+}
+

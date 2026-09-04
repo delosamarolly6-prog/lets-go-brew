@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Contact Us | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/contact.css') }}">
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+    <header class="navbar">
+
+        <div class="logo">
+            <h2>Let's Go Brew</h2>
+            <span>CAFÉ</span>
+        </div>
+
+        <nav>
+            <a href="/">HOME</a>
+            <a href="/menu">MENU</a>
+            <a href="/about">ABOUT US</a>
+            <a href="/contact" class="active">CONTACT</a>
+        </nav>
+
+        <a href="/menu" class="order-btn">
+            ORDER NOW
+        </a>
+
+    </header>
+
+
+    <!-- CONTACT HEADER -->
+    <section class="contact-header">
+
+        <p>GET IN TOUCH</p>
+
+        <h1>Contact Us</h1>
+
+        <span></span>
+
+        <p class="subtitle">
+            We'd love to hear from you!
+        </p>
+
+    </section>
+
+
+    <!-- CONTACT INFORMATION + FORM -->
+    <section class="contact-section">
+
+        <!-- CONTACT INFO -->
+        <div class="contact-info">
+
+            <h2>Visit Us</h2>
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    📍
+                </div>
+
+                <div>
+                    <h3>Address</h3>
+
+                    <p>
+                        Let's Go Brew Café<br>
+                        Coffee Street<br>
+                        Philippines
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    📞
+                </div>
+
+                <div>
+                    <h3>Call Us</h3>
+
+                    <p>
+                        +63 912 345 6789
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    ✉
+                </div>
+
+                <div>
+                    <h3>Email Us</h3>
+
+                    <p>
+                        info@letsgoBrewcafe.com
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="info-item">
+
+                <div class="info-icon">
+                    🕐
+                </div>
+
+                <div>
+                    <h3>Opening Hours</h3>
+
+                    <p>
+                        Monday - Sunday<br>
+                        7:00 AM - 9:00 PM
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- MESSAGE FORM -->
+        <div class="contact-form-container">
+
+            <h2>Send Us a Message</h2>
+
+            <p>
+                Have a question or feedback?
+                Send us a message.
+            </p>
+
+            <form action="/contact" method="POST">
+
+                <div class="form-group">
+
+                    <label for="name">
+                        Your Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="name"
+                        name="name"
+                        placeholder="Enter your name"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Your Email
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Enter your email"
+                        required>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label for="message">
+                        Your Message
+                    </label>
+
+                    <textarea
+                        id="message"
+                        name="message"
+                        rows="6"
+                        placeholder="Write your message..."
+                        required></textarea>
+
+                </div>
+
+
+                <button type="submit">
+                    SEND MESSAGE
+                </button>
+
+            </form>
+
+        </div>
+
+    </section>
+
+
+    <!-- GOOGLE MAP -->
+    <section class="map-section">
+
+        <div class="map-title">
+
+            <p>FIND US</p>
+
+            <h2>Visit Let's Go Brew Café</h2>
+
+        </div>
+
+        <div id="map"></div>
+
+    </section>
+
+
+    <!-- GOOGLE MAP SCRIPT -->
+    <script>
+        window.GOOGLE_MAPS_API_KEY =
+            "{{ google_maps_api_key }}";
+    </script>
+
+    <script src="{{ url_for('static', filename='js/map.js') }}"></script>
+
+</body>
+
+</html>

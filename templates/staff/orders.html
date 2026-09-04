@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Staff Orders | Let's Go Brew Café</title>
+
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+
+    <!-- STAFF ORDERS CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/staff-orders.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =========================
+         ORDERS CONTAINER
+    ========================== -->
+
+    <div class="orders-container">
+
+
+        <!-- =========================
+             PAGE TITLE
+        ========================== -->
+
+        <div class="orders-title">
+
+            <h1>Customer Orders</h1>
+
+            <p>
+                View and process customer orders.
+            </p>
+
+        </div>
+
+
+        <!-- =========================
+             SEARCH AND FILTER
+        ========================== -->
+
+        <div class="order-tools">
+
+            <!-- SEARCH -->
+
+            <input
+                type="text"
+                id="orderSearch"
+                class="order-search"
+                placeholder="Search Order ID or Customer ID...">
+
+
+            <!-- STATUS FILTER -->
+
+            <select
+                id="statusFilter"
+                class="status-filter">
+
+                <option value="All">
+                    All Status
+                </option>
+
+                <option value="Pending">
+                    Pending
+                </option>
+
+                <option value="Preparing">
+                    Preparing
+                </option>
+
+                <option value="Ready">
+                    Ready
+                </option>
+
+                <option value="Completed">
+                    Completed
+                </option>
+
+                <option value="Cancelled">
+                    Cancelled
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- =========================
+             CHECK IF ORDERS EXIST
+        ========================== -->
+
+        {% if orders %}
+
+
+            <!-- =========================
+                 LOOP THROUGH ORDERS
+            ========================== -->
+
+            {% for order in orders %}
+
+
+            <!-- =========================
+                 ORDER CARD
+            ========================== -->
+
+            <div
+                class="order-card"
+
+                data-order-id="{{ order.order_id }}"
+
+                data-customer-id="{{ order.user_id }}"
+
+                data-status="{{ order.status }}">
+
+
+                <!-- =========================
+                     ORDER HEADER
+                ========================== -->
+
+                <div class="order-header">
+
+
+                    <!-- ORDER ID -->
+
+                    <h2>
+                        Order #{{ order.order_id }}
+                    </h2>
+
+
+                    <!-- CURRENT STATUS -->
+
+                    <div>
+
+                        <span>
+                            Current Status:
+                        </span>
+
+
+                        <span
+                            class="status-badge status-{{ order.status|lower }}">
+
+                            {{ order.status }}
+
+                        </span>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =========================
+                     ORDER INFORMATION
+                ========================== -->
+
+                <div class="order-info">
+
+
+                    <!-- CUSTOMER ID -->
+
+                    <div>
+
+                        <strong>
+                            Customer ID
+                        </strong>
+
+                        {{ order.user_id }}
+
+                    </div>
+
+
+                    <!-- ORDER DATE -->
+
+                    <div>
+
+                        <strong>
+                            Order Date
+                        </strong>
+
+                        {{ order.order_date }}
+
+                    </div>
+
+
+                    <!-- TOTAL AMOUNT -->
+
+                    <div>
+
+                        <strong>
+                            Total Amount
+                        </strong>
+
+                        ₱{{ "%.2f"|format(order.total_amount) }}
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =========================
+                     ORDER ITEMS
+                ========================== -->
+
+                <h3>
+                    Order Items
+                </h3>
+
+
+                <table class="order-items">
+
+
+                    <!-- TABLE HEADER -->
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Item
+                            </th>
+
+                            <th>
+                                Quantity
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Subtotal
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <!-- TABLE BODY -->
+
+                    <tbody>
+
+
+                        {% for item in order["items"] %}
+
+
+                        <tr>
+
+                            <!-- ITEM NAME -->
+
+                            <td>
+                                {{ item.item_name }}
+                            </td>
+
+
+                            <!-- QUANTITY -->
+
+                            <td>
+                                {{ item.quantity }}
+                            </td>
+
+
+                            <!-- PRICE -->
+
+                            <td>
+                                ₱{{ "%.2f"|format(item.price) }}
+                            </td>
+
+
+                            <!-- SUBTOTAL -->
+
+                            <td>
+                                ₱{{ "%.2f"|format(item.subtotal) }}
+                            </td>
+
+
+                        </tr>
+
+
+                        {% endfor %}
+
+
+                    </tbody>
+
+
+                </table>
+
+
+                <!-- =========================
+                     ORDER TOTAL
+                ========================== -->
+
+                <div class="order-total">
+
+                    Total:
+
+                    ₱{{ "%.2f"|format(order.total_amount) }}
+
+                </div>
+
+
+                <!-- =========================
+                     STATUS + UPDATE + DELETE
+                ========================== -->
+
+                <div class="status-section">
+
+
+                    <label>
+                        Update Order Status
+                    </label>
+
+
+                    <!-- =========================
+                         UPDATE STATUS FORM
+                    ========================== -->
+
+                    <form
+                        method="POST"
+
+                        action="{{ url_for('update_order_status') }}">
+
+
+                        <!-- ORDER ID -->
+
+                        <input
+                            type="hidden"
+
+                            name="order_id"
+
+                            value="{{ order.order_id }}">
+
+
+                        <!-- STATUS SELECT -->
+
+                        <select
+
+                            name="status"
+
+                            class="status-select">
+
+
+                            <!-- PENDING -->
+
+                            <option
+                                value="Pending"
+
+                                {% if order.status == "Pending" %}
+                                selected
+                                {% endif %}>
+
+                                Pending
+
+                            </option>
+
+
+                            <!-- PREPARING -->
+
+                            <option
+                                value="Preparing"
+
+                                {% if order.status == "Preparing" %}
+                                selected
+                                {% endif %}>
+
+                                Preparing
+
+                            </option>
+
+
+                            <!-- READY -->
+
+                            <option
+                                value="Ready"
+
+                                {% if order.status == "Ready" %}
+                                selected
+                                {% endif %}>
+
+                                Ready
+
+                            </option>
+
+
+                            <!-- COMPLETED -->
+
+                            <option
+                                value="Completed"
+
+                                {% if order.status == "Completed" %}
+                                selected
+                                {% endif %}>
+
+                                Completed
+
+                            </option>
+
+
+                            <!-- CANCELLED -->
+
+                            <option
+                                value="Cancelled"
+
+                                {% if order.status == "Cancelled" %}
+                                selected
+                                {% endif %}>
+
+                                Cancelled
+
+                            </option>
+
+
+                        </select>
+
+
+                        <!-- UPDATE BUTTON -->
+
+                        <button
+                            type="submit"
+
+                            class="update-btn">
+
+                            UPDATE STATUS
+
+                        </button>
+
+
+                    </form>
+
+
+                    <!-- =========================
+                         DELETE ORDER FORM
+                    ========================== -->
+
+                    <form
+
+                        method="POST"
+
+                        action="{{ url_for('delete_staff_order') }}">
+
+
+                        <!-- ORDER ID -->
+
+                        <input
+                            type="hidden"
+
+                            name="order_id"
+
+                            value="{{ order.order_id }}">
+
+
+                        <!-- DELETE BUTTON -->
+
+                        <button
+
+                            type="submit"
+
+                            class="delete-btn"
+
+                            onclick="return confirm(
+                                'Are you sure you want to delete Order #{{ order.order_id }}?'
+                            );">
+
+                            DELETE ORDER
+
+                        </button>
+
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+            <!-- END ORDER CARD -->
+
+
+            {% endfor %}
+            <!-- END ORDER LOOP -->
+
+
+        {% else %}
+
+
+            <!-- =========================
+                 NO ORDERS
+            ========================== -->
+
+            <div class="no-orders">
+
+                <h2>
+                    No orders yet.
+                </h2>
+
+                <p>
+                    Customer orders will appear here.
+                </p>
+
+            </div>
+
+
+        {% endif %}
+
+
+    </div>
+    <!-- END ORDERS CONTAINER -->
+
+
+    <!-- =========================
+         SEARCH AND FILTER SCRIPT
+    ========================== -->
+
+    <script>
+
+        document.addEventListener(
+            "DOMContentLoaded",
+
+            function () {
+
+
+                // SEARCH INPUT
+
+                const searchInput =
+
+                    document.getElementById(
+                        "orderSearch"
+                    );
+
+
+                // STATUS FILTER
+
+                const statusFilter =
+
+                    document.getElementById(
+                        "statusFilter"
+                    );
+
+
+                // ALL ORDER CARDS
+
+                const orderCards =
+
+                    document.querySelectorAll(
+                        ".order-card"
+                    );
+
+
+                // =========================
+                // FILTER FUNCTION
+                // =========================
+
+                function filterOrders() {
+
+
+                    const searchValue =
+
+                        searchInput.value
+                        .toLowerCase()
+                        .trim();
+
+
+                    const selectedStatus =
+
+                        statusFilter.value
+                        .toLowerCase();
+
+
+                    // LOOP THROUGH ORDERS
+
+                    orderCards.forEach(
+
+                        function (card) {
+
+
+                            const orderId =
+
+                                card.dataset.orderId
+                                .toLowerCase();
+
+
+                            const customerId =
+
+                                card.dataset.customerId
+                                .toLowerCase();
+
+
+                            const status =
+
+                                card.dataset.status
+                                .toLowerCase();
+
+
+                            // =========================
+                            // SEARCH CONDITION
+                            // =========================
+
+                            const matchesSearch =
+
+                                orderId.includes(searchValue)
+
+                                ||
+
+                                customerId.includes(searchValue);
+
+
+                            // =========================
+                            // STATUS CONDITION
+                            // =========================
+
+                            const matchesStatus =
+
+                                selectedStatus === "all"
+
+                                ||
+
+                                status === selectedStatus;
+
+
+                            // =========================
+                            // SHOW OR HIDE ORDER
+                            // =========================
+
+                            if (
+
+                                matchesSearch
+
+                                &&
+
+                                matchesStatus
+
+                            ) {
+
+
+                                card.style.display =
+                                    "block";
+
+
+                            } else {
+
+
+                                card.style.display =
+                                    "none";
+
+
+                            }
+
+
+                        }
+
+                    );
+
+
+                }
+
+
+                // =========================
+                // SEARCH EVENT
+                // =========================
+
+                if (searchInput) {
+
+                    searchInput.addEventListener(
+
+                        "input",
+
+                        filterOrders
+
+                    );
+
+                }
+
+
+                // =========================
+                // FILTER EVENT
+                // =========================
+
+                if (statusFilter) {
+
+                    statusFilter.addEventListener(
+
+                        "change",
+
+                        filterOrders
+
+                    );
+
+                }
+
+
+            }
+
+        );
+
+    </script>
+
+
+</body>
+
+</html>

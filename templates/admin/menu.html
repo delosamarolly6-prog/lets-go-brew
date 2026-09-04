@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Menu | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/menu.css') }}">
+</head>
+
+
+<body>
+     <a href="{{ url_for('admin_dashboard') }}" class="back-dashboard">
+    ← Back to Dashboard
+</a>
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+
+    <header class="navbar">
+
+        <div class="logo">
+            <h2>Let's Go Brew</h2>
+            <span>CAFÉ</span>
+        </div>
+
+
+        <nav>
+            <a href="/">HOME</a>
+
+            <a href="/menu" class="active">
+                MENU
+            </a>
+
+            <a href="/about">
+                ABOUT US
+            </a>
+
+            <a href="/contact">
+                CONTACT
+            </a>
+        </nav>
+
+
+        <a href="/menu" class="order-btn">
+            ORDER NOW
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MENU HEADER
+    ========================== -->
+
+    <section class="menu-header">
+
+        <p>
+            FRESHLY PREPARED FOR YOU
+        </p>
+
+        <h1>
+            Our Menu
+        </h1>
+
+        <span class="line"></span>
+
+        <p class="subtitle">
+            Discover our selection of handcrafted coffee,
+            refreshing drinks, and delicious food.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         CATEGORY BUTTONS
+    ========================== -->
+
+    <div class="categories">
+
+        <button
+            type="button"
+            class="category active"
+            data-category="all">
+
+            All
+
+        </button>
+
+
+        <button
+            type="button"
+            class="category"
+            data-category="coffee">
+
+            Coffee
+
+        </button>
+
+
+        <button
+            type="button"
+            class="category"
+            data-category="non-coffee">
+
+            Non-Coffee
+
+        </button>
+
+
+        <button
+            type="button"
+            class="category"
+            data-category="pastries">
+
+            Pastries
+
+        </button>
+
+
+        <button
+            type="button"
+            class="category"
+            data-category="meals">
+
+            Meals
+
+        </button>
+
+    </div>
+
+
+    <!-- =========================
+         MENU ITEMS FROM DATABASE
+    ========================== -->
+
+    <section class="menu-container">
+
+        {% for item in menu_items %}
+
+
+        <!-- MENU CARD -->
+
+        <div
+            class="menu-card"
+
+            data-category="{{ item.category|lower|replace(' ', '-') }}">
+
+            <!-- MENU IMAGE -->
+
+            <div class="menu-image">
+
+                <img
+                    src="{{ url_for(
+                        'static',
+                        filename='images/' + item.image
+                    ) }}"
+
+                    alt="{{ item.item_name }}"
+
+                    onerror="this.style.display='none';"
+                >
+
+            </div>
+
+
+            <!-- MENU INFORMATION -->
+
+            <div class="menu-info">
+
+                <!-- ITEM NAME -->
+
+                <h3>
+                    {{ item.item_name }}
+                </h3>
+
+
+                <!-- DESCRIPTION -->
+
+                <p>
+                    {{ item.description }}
+                </p>
+
+
+                <!-- PRICE + ADD BUTTON -->
+
+                <div class="menu-bottom">
+
+                    <!-- PRICE -->
+
+                    <span class="menu-price">
+
+                        ₱{{ "%.2f"|format(item.price) }}
+
+                    </span>
+
+
+                    <!-- ADD TO CART -->
+
+                    <button
+                        type="button"
+
+                        onclick="addToCart(
+                            '{{ item.menu_id }}',
+                            '{{ item.item_name }}',
+                            '{{ item.price }}'
+                        )">
+
+                        ADD
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        {% else %}
+
+
+        <!-- =========================
+             NO MENU ITEMS
+        ========================== -->
+
+        <div class="no-menu">
+
+            <h3>
+                No menu items available.
+            </h3>
+
+            <p>
+                Please check the menu database.
+            </p>
+
+        </div>
+
+
+        {% endfor %}
+
+    </section>
+
+
+    <!-- =========================
+         ORDER CTA
+    ========================== -->
+
+    <section class="menu-cta">
+
+        <div>
+
+            <h2>
+                Craving something delicious?
+            </h2>
+
+            <p>
+                Place your order and enjoy your favorite brew.
+            </p>
+
+        </div>
+
+
+        <a href="/login">
+
+            ORDER NOW
+
+        </a>
+
+    </section> 
+                <div class="back-home">
+
+                    <a href="{{ url_for('home') }}">
+                        ← Back to Home
+                    </a>
+
+                </div>
+
+                
+
+
+    <!-- =========================
+         JAVASCRIPT
+    ========================== -->
+
+    <!-- MENU FILTER -->
+
+    <script
+        src="{{ url_for(
+            'static',
+            filename='js/menu.js'
+        ) }}">
+    </script>
+
+
+    <!-- CART / ORDER -->
+
+    <script
+    src="{{ url_for(
+        'static',
+        filename='js/admin-menu.js'
+    ) }}">
+</script>
+
+</body>
+
+</html>

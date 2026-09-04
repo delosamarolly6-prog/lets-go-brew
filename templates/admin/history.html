@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Order History | Let's Go Brew Café</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/admin.css') }}">
+
+</head>
+
+
+<body>
+
+
+<!-- =========================
+     SIDEBAR
+========================= -->
+
+<aside class="sidebar">
+
+    <div class="logo">
+
+        <h2>Let's Go Brew</h2>
+
+        <span>CAFÉ</span>
+
+    </div>
+
+
+    <nav>
+
+        <a href="{{ url_for('admin_dashboard') }}">
+
+            🏠 Dashboard
+
+        </a>
+
+
+        <a href="{{ url_for('admin_menu') }}">
+
+            ☕ Menu
+
+        </a>
+
+
+        <a href="{{ url_for('admin_orders') }}">
+
+            🛒 Orders
+
+        </a>
+
+
+        <a href="{{ url_for('admin_messages') }}">
+
+            💬 Messages
+
+        </a>
+
+
+        <a href="{{ url_for('admin_history') }}"
+           class="active">
+
+            📋 History
+
+        </a>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <a href="{{ url_for('home') }}">
+
+            🌐 View Website
+
+        </a>
+
+
+        <a href="{{ url_for('logout') }}"
+           class="logout">
+
+            🚪 Logout
+
+        </a>
+
+    </div>
+
+</aside>
+
+
+
+<!-- =========================
+     MAIN CONTENT
+========================= -->
+
+<main class="main-content">
+
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <header class="topbar">
+
+        <div>
+
+            <h1>Order History</h1>
+
+            <p>
+                View completed and previous customer orders.
+            </p>
+
+        </div>
+
+
+        <div class="admin-profile">
+
+            <div class="profile-icon">
+
+                A
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    {{ session.get('username', 'Admin') }}
+                </strong>
+
+                <small>
+                    Administrator
+                </small>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================
+         HISTORY CARD
+    ========================== -->
+
+    <section class="dashboard-card history-card">
+
+
+        <!-- HEADER -->
+
+        <div class="card-header">
+
+            <div>
+
+                <h2>
+                    Order History
+                </h2>
+
+                <p class="history-description">
+
+                    Complete record of customer orders.
+
+                </p>
+
+            </div>
+
+
+            <!-- SEARCH -->
+
+            <input
+                type="text"
+                id="historySearch"
+                placeholder="🔍 Search orders..."
+            >
+
+        </div>
+
+
+
+        <!-- =========================
+             FILTER
+        ========================== -->
+
+        <div class="history-filter">
+
+            <select id="statusFilter">
+
+                <option value="all">
+
+                    All Status
+
+                </option>
+
+
+                <option value="pending">
+
+                    Pending
+
+                </option>
+
+
+                <option value="preparing">
+
+                    Preparing
+
+                </option>
+
+
+                <option value="completed">
+
+                    Completed
+
+                </option>
+
+
+                <option value="cancelled">
+
+                    Cancelled
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+
+        <!-- =========================
+             HISTORY TABLE
+        ========================== -->
+
+        <div class="history-table-container">
+
+            <table id="historyTable">
+
+
+                <!-- TABLE HEADER -->
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Order ID
+                        </th>
+
+
+                        <th>
+                            Customer
+                        </th>
+
+
+                        <th>
+                            Order Date
+                        </th>
+
+
+                        <th>
+                            Total Amount
+                        </th>
+
+
+                        <th>
+                            Status
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+
+                <!-- TABLE BODY -->
+
+                <tbody>
+
+
+                    {% for order in history %}
+
+
+                    <tr
+                        data-status="{{ order.status|lower }}"
+                    >
+
+
+                        <!-- ORDER ID -->
+
+                        <td>
+
+                            #{{ order.order_id }}
+
+                        </td>
+
+
+
+                        <!-- CUSTOMER -->
+
+                        <td>
+
+                            {% if order.username %}
+
+                                {{ order.username }}
+
+                            {% else %}
+
+                                User #{{ order.user_id }}
+
+                            {% endif %}
+
+                        </td>
+
+
+
+                        <!-- ORDER DATE -->
+
+                        <td>
+
+                            {{ order.order_date }}
+
+                        </td>
+
+
+
+                        <!-- TOTAL -->
+
+                        <td>
+
+                            ₱{{ "%.2f"|format(order.total_amount) }}
+
+                        </td>
+
+
+
+                        <!-- STATUS -->
+
+                        <td>
+
+
+                            <span
+                                class="status
+                                {{ order.status|lower }}"
+                            >
+
+                                {{ order.status }}
+
+                            </span>
+
+
+                        </td>
+
+
+                    </tr>
+
+
+                    {% else %}
+
+
+                    <!-- NO HISTORY -->
+
+                    <tr>
+
+                        <td
+                            colspan="5"
+                            class="no-history"
+                        >
+
+                            No order history available.
+
+                        </td>
+
+                    </tr>
+
+
+                    {% endfor %}
+
+
+                </tbody>
+
+
+            </table>
+
+        </div>
+
+
+    </section>
+
+
+</main>
+
+
+
+<!-- =========================
+     HISTORY JAVASCRIPT
+========================= -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        const searchInput =
+            document.getElementById(
+                "historySearch"
+            );
+
+
+        const statusFilter =
+            document.getElementById(
+                "statusFilter"
+            );
+
+
+        const rows =
+            document.querySelectorAll(
+                "#historyTable tbody tr"
+            );
+
+
+        function filterHistory() {
+
+
+            const searchValue =
+                searchInput.value
+                .toLowerCase();
+
+
+            const selectedStatus =
+                statusFilter.value;
+
+
+            rows.forEach(
+                function (row) {
+
+
+                    const rowText =
+                        row.innerText
+                        .toLowerCase();
+
+
+                    const rowStatus =
+                        row.getAttribute(
+                            "data-status"
+                        );
+
+
+                    const matchesSearch =
+                        rowText.includes(
+                            searchValue
+                        );
+
+
+                    const matchesStatus =
+
+                        selectedStatus === "all"
+
+                        ||
+
+                        rowStatus ===
+                        selectedStatus;
+
+
+                    if (
+
+                        matchesSearch
+
+                        &&
+
+                        matchesStatus
+
+                    ) {
+
+
+                        row.style.display =
+                            "";
+
+
+                    }
+
+                    else {
+
+
+                        row.style.display =
+                            "none";
+
+
+                    }
+
+
+                }
+
+            );
+
+
+        }
+
+
+        searchInput.addEventListener(
+
+            "input",
+
+            filterHistory
+
+        );
+
+
+        statusFilter.addEventListener(
+
+            "change",
+
+            filterHistory
+
+        );
+
+
+    }
+
+);
+
+</script>
+
+
+</body>
+
+</html>
